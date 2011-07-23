@@ -1,0 +1,19 @@
+SHORT GUIDE
+
+Copy app directory somewhere below your www root directory. For now we'll assume it was /var/www/.
+Open your browser and navigate to "http://localhost/app/index.php?text=some cool text". What you should see as a result is white text "SOME COOL TEXT" on black background. The whole purpose of this is to make sure that php, js and css work as expected. Php takes care of processing query string and presenting an html page with text, JavaScript capitalizes the supplied text, CSS changes background color to black and text color to white.
+
+Ok. Now lets convert this website into a phar archive. On the command line run "php create.php". As a result app.phar should appear in the same directory. Remove "app" directory from the web server and copy app.phar file to the same place. Open your web browser and navigate to "http://localhost/app.phar/index.php?text=some cool text". You should see the same result as before.
+
+If you have mod_rewrite enabled, copy .htaccess to the same directory where you've copied the app.phar file. Now you can navigate to "http://localhost/index.php?text=some cool text", hiding the presence of "app.phar" in the url. Mod_rewrite rules will take care about redirecting your request to the phar archive.
+
+
+THIS REPOSITORY CONTENTS
+
+create.php - php script ment to be run from command line. It will generate app.phar based on the contents of the "app" directory.
+
+stub.php - stub file. Is used by create.php to generate a phar stub function making our app.phar act as front controller.
+
+.htaccess - apache configuration with mod_rewrite rules. This will make our urls prettier.
+
+app - a small php website for testing purposes. It contains a .php, a .js and a .css file. 
